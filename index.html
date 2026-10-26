@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Vijeth Balasubramaniam — machine learning, data science and research portfolio.">
+  <title>Vijeth Balasubramaniam | ML & Research Portfolio</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="Home"><span class="brand-mark">VB</span><span>Vijeth Balasubramaniam</span></a>
+    <nav aria-label="Main navigation">
+      <a href="#work">Projects</a><a href="#research">Research direction</a><a href="#about">About</a>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch colour theme">☾</button>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="status-dot"></span> MSc Data Science & Artificial Intelligence</p>
+        <h1>Building a stronger understanding of <span class="gradient-text">machine learning.</span></h1>
+        <p class="hero-lede">I’m developing a research-focused portfolio across machine learning, deep learning, computer vision and reinforcement learning — with a long-term interest in robust ML for astronomy and exoplanet discovery.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#work">Explore projects <span aria-hidden="true">↘</span></a>
+          <a class="button secondary" href="#research">Research interests</a>
+        </div>
+        <p class="hero-note">A work in progress: project pages will be improved as code, experiments and evidence are made reproducible.</p>
+      </div>
+      <div class="hero-panel" aria-label="Portfolio focus areas">
+        <div class="orb orb-one"></div><div class="orb orb-two"></div>
+        <div class="panel-label">CURRENT FOCUS</div>
+        <div class="focus-line"><span>01</span><div><b>Machine learning</b><small>Baselines · evaluation · error analysis</small></div></div>
+        <div class="focus-line"><span>02</span><div><b>Reliable experiments</b><small>Reproducibility · validation · limitations</small></div></div>
+        <div class="focus-line"><span>03</span><div><b>Space & astronomy AI</b><small>Light curves · domain shift · detection</small></div></div>
+        <div class="panel-foot"><span class="pulse"></span> Learning in public, one honest step at a time</div>
+      </div>
+    </section>
+
+    <section class="metrics" aria-label="Portfolio overview">
+      <div><strong id="project-count">10</strong><span>project summaries</span></div>
+      <div><strong>4+</strong><span>ML research themes</span></div>
+      <div><strong>2026</strong><span>portfolio refresh</span></div>
+      <p>Counts describe this portfolio catalogue, not publication or research output.</p>
+    </section>
+
+    <section id="work" class="section">
+      <div class="section-heading">
+        <div><p class="eyebrow">SELECTED WORK</p><h2>Projects & experiments</h2><p class="section-lede">Start with the research and deep-learning projects. Each card opens a summary with the next steps needed to make the work reproducible.</p></div>
+      </div>
+      <div class="toolbar">
+        <label class="search-box"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Search projects, methods, skills…" aria-label="Search projects"></label>
+        <div id="filters" class="filters" aria-label="Filter projects"></div>
+      </div>
+      <p id="result-count" class="result-count" aria-live="polite"></p>
+      <div id="project-grid" class="project-grid"></div>
+      <div id="empty-state" class="empty-state" hidden><strong>No matching projects</strong><p>Try another search or category.</p></div>
+    </section>
+
+    <section id="research" class="section research-section">
+      <div class="research-copy"><p class="eyebrow">WHERE I’M HEADING</p><h2>Research interests</h2><p>My intended PhD direction is the use of robust machine learning for astronomical data, particularly exoplanet detection from Kepler and TESS light curves.</p><p>I’m interested in the practical questions behind a reliable detector: noise and stellar variability, class imbalance, false positives, calibration, and performance shifts between instruments or datasets.</p><a class="text-link" href="https://github.com/" target="_blank" rel="noreferrer">Explore work on GitHub ↗</a></div>
+      <div class="interest-list">
+        <article><span class="interest-number">01</span><div><h3>Time-series & transit detection</h3><p>Build clear baselines before adding complexity; evaluate sensitivity to faint or noisy signals.</p></div></article>
+        <article><span class="interest-number">02</span><div><h3>Robustness & domain shift</h3><p>Test whether performance holds across instruments, observing conditions and data pipelines.</p></div></article>
+        <article><span class="interest-number">03</span><div><h3>Scientific evaluation</h3><p>Prioritise recall, precision, calibration, uncertainty and error analysis — not accuracy alone.</p></div></article>
+      </div>
+    </section>
+
+    <section id="about" class="section about-section">
+      <div><p class="eyebrow">ABOUT</p><h2>From engineering to data-driven research.</h2></div>
+      <div><p>I have a background in mechatronics and an MSc in Data Science & Artificial Intelligence. I’m strengthening my practical foundations by revisiting code, documenting decisions and turning academic assignments into transparent, reproducible projects.</p><p>This site deliberately separates completed work from work that still needs verification. I’ll only publish metrics, results and claims that I can support with code or reports.</p><div class="skill-pills"><span>Python</span><span>Machine Learning</span><span>Deep Learning</span><span>Data Analysis</span><span>Research Methods</span><span>Scientific Computing</span></div></div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><a class="brand" href="#"><span class="brand-mark">VB</span><span>Vijeth Balasubramaniam</span></a><p>Built to document learning honestly, not to chase a contribution streak.</p><a href="#main">Back to top ↑</a></footer>
+
+  <dialog id="project-dialog" class="project-dialog" aria-labelledby="dialog-title">
+    <button class="dialog-close" id="dialog-close" type="button" aria-label="Close project details">×</button>
+    <p class="eyebrow" id="dialog-category"></p><h2 id="dialog-title"></h2><p id="dialog-summary" class="dialog-summary"></p>
+    <div class="dialog-block"><h3>Research question</h3><p id="dialog-question"></p></div>
+    <div class="dialog-block"><h3>Approach to document</h3><p id="dialog-approach"></p></div>
+    <div class="dialog-block"><h3>What this project can demonstrate</h3><p id="dialog-lessons"></p></div>
+    <div class="dialog-footer"><span id="dialog-status" class="status-pill"></span><button id="dialog-done" class="button primary" type="button">Close details</button></div>
+  </dialog>
+  <script src="app.js"></script>
+</body>
+</html>

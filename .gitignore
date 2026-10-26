@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+.env
+.env.*
+!.env.example
+
+# Data / model artefacts (review before committing)
+data/
+datasets/
+*.parquet
+*.h5
+*.pt
+*.pth
+*.ckpt
+models/
+outputs/
+runs/
+wandb/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
