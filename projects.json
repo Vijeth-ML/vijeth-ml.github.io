@@ -1,0 +1,162 @@
+[
+  {
+    "title": "Mental Health Prediction Using Machine Learning",
+    "category": "Research",
+    "year": "MSc dissertation",
+    "tags": [
+      "Machine Learning",
+      "Classification",
+      "Evaluation"
+    ],
+    "summary": "An MSc research project exploring machine-learning approaches to predicting student mental-health risk from academic and behavioural data.",
+    "question": "How can machine-learning methods be evaluated for identifying patterns associated with student mental-health risk?",
+    "approach": "Document the dataset provenance, preprocessing decisions, train/validation/test design, candidate models, evaluation metrics and limitations. The original portfolio describes this as the MSc thesis; exact results should be added only after checking the dissertation and code.",
+    "lessons": "This project is a useful starting point for discussing data quality, responsible use of sensitive data, model evaluation and the difference between predictive performance and real-world clinical usefulness.",
+    "status": "Needs reproducible README",
+    "featured": true
+  },
+  {
+    "title": "EMNIST Character Classification",
+    "category": "Deep Learning",
+    "year": "Applied AI",
+    "tags": [
+      "PyTorch / Neural Networks",
+      "CNN",
+      "Classification"
+    ],
+    "summary": "A neural-network project using the EMNIST dataset to explore handwritten character classification and compare multilayer perceptron and convolutional approaches.",
+    "question": "How does model architecture affect character-classification performance?",
+    "approach": "Rebuild the notebook/script as a reproducible experiment: state the dataset split, preprocessing, model definitions, training setup, random seed and per-class evaluation.",
+    "lessons": "Compare a simple baseline with a CNN, inspect a confusion matrix and analyse errors rather than reporting accuracy alone.",
+    "status": "Needs reproducible README",
+    "featured": true
+  },
+  {
+    "title": "Semantic Segmentation",
+    "category": "Computer Vision",
+    "year": "Applied AI",
+    "tags": [
+      "Deep Learning",
+      "Computer Vision",
+      "Segmentation"
+    ],
+    "summary": "A semantic-segmentation assignment using the Cambridge Labeled Objects in Video dataset, described in the original portfolio as 101 images with pixel-level labels across 32 object classes.",
+    "question": "Can a deep-learning model assign a semantic class to each pixel in a scene?",
+    "approach": "Record the train/validation split, image and mask transformations, loss function, baseline, and segmentation metrics such as mean Intersection over Union (mIoU).",
+    "lessons": "Segmentation requires careful handling of class imbalance, image-mask alignment and metrics that reflect pixel-level overlap.",
+    "status": "Group project — clarify individual contribution",
+    "featured": true
+  },
+  {
+    "title": "Multi-Armed Bandit Algorithms",
+    "category": "Reinforcement Learning",
+    "year": "Machine Learning & Bio-Inspired Optimisation",
+    "tags": [
+      "Reinforcement Learning",
+      "Exploration vs Exploitation",
+      "Simulation"
+    ],
+    "summary": "An implementation-focused assignment on n-armed bandits, inspired by Sutton and Barto's Reinforcement Learning: An Introduction.",
+    "question": "How do different action-selection strategies balance exploration and exploitation?",
+    "approach": "Create a repeatable simulation over many random seeds and compare reward over time, cumulative regret and sensitivity to algorithm parameters.",
+    "lessons": "Average results across runs and include uncertainty; a single reward curve can be misleading.",
+    "status": "Needs results and plots",
+    "featured": true
+  },
+  {
+    "title": "OpenAI Gym / Gymnasium Environment",
+    "category": "Reinforcement Learning",
+    "year": "Machine Learning & Bio-Inspired Optimisation",
+    "tags": [
+      "Reinforcement Learning",
+      "Agent Training",
+      "Evaluation"
+    ],
+    "summary": "A project exploring a deep-reinforcement-learning method in a Gym-style environment.",
+    "question": "Can an agent learn a useful policy through interaction with an environment?",
+    "approach": "Name the environment and algorithm, document reward design and hyperparameters, compare against a random or simple baseline, and show learning curves across independent seeds.",
+    "lessons": "Reward design, environment versions and evaluation protocols strongly affect reproducibility.",
+    "status": "Needs environment and results verified",
+    "featured": false
+  },
+  {
+    "title": "Natural Language Processing — Multilingual Chatbot Concept",
+    "category": "NLP",
+    "year": "Research Methods project",
+    "tags": [
+      "NLP",
+      "Chatbots",
+      "Multilingual Systems"
+    ],
+    "summary": "A research project proposing a multilingual chatbot system for business-to-business and business-to-consumer use, including translation support.",
+    "question": "How could multilingual conversational support be designed for users with different language needs?",
+    "approach": "Present this as a design/research project unless a working implementation can be demonstrated. Add architecture, language coverage, test cases and evaluation evidence where available.",
+    "lessons": "A credible NLP portfolio distinguishes a proposed design from a tested system and measures translation quality and task completion.",
+    "status": "Clarify implementation scope",
+    "featured": false
+  },
+  {
+    "title": "Binary Classification Model Comparison",
+    "category": "Machine Learning",
+    "year": "Applied AI",
+    "tags": [
+      "Classification",
+      "Model Comparison",
+      "Metrics"
+    ],
+    "summary": "An applied-AI assignment comparing supervised-learning methods on a binary-classification problem.",
+    "question": "How do different supervised methods compare under the same evaluation protocol?",
+    "approach": "Identify the dataset and algorithms from the original submission, use a leakage-safe split, compare precision, recall, F1 and ROC-AUC where appropriate, and discuss threshold choice.",
+    "lessons": "Model comparisons are only meaningful when preprocessing and validation are consistent across models.",
+    "status": "Add dataset, models and results",
+    "featured": false
+  },
+  {
+    "title": "Clustering Word Embeddings",
+    "category": "Unsupervised Learning",
+    "year": "Data Mining & Visualisation",
+    "tags": [
+      "Clustering",
+      "Word Embeddings",
+      "Unsupervised Learning"
+    ],
+    "summary": "A clustering assignment involving words represented by 300-dimensional embedding vectors.",
+    "question": "What structure can clustering reveal in a space of word embeddings?",
+    "approach": "Document scaling or normalization choices, compare clustering methods, use suitable internal metrics, and inspect representative words from clusters. Avoid claiming semantic quality from a score alone.",
+    "lessons": "High-dimensional distance measures and the choice of cluster count can substantially affect interpretation.",
+    "status": "Add methods and results",
+    "featured": false
+  },
+  {
+    "title": "Voting Rules",
+    "category": "Programming",
+    "year": "Programming Fundamentals",
+    "tags": [
+      "Python",
+      "Algorithms",
+      "Social Choice"
+    ],
+    "summary": "A Python assignment implementing voting rules over agent preference orderings and alternatives.",
+    "question": "How do different voting rules aggregate individual preference rankings into a collective outcome?",
+    "approach": "Explain the input representation, each implemented rule, tie handling and test cases. Include small examples that make the outcomes easy to verify.",
+    "lessons": "Clear tests and explicit edge-case handling are as important as the core algorithm.",
+    "status": "Good candidate for a clean small repository",
+    "featured": false
+  },
+  {
+    "title": "Bank Account Classes",
+    "category": "Programming",
+    "year": "Programming Fundamentals",
+    "tags": [
+      "Python",
+      "Object-Oriented Programming",
+      "Unit Testing"
+    ],
+    "summary": "An object-oriented Python assignment implementing basic and premium bank-account classes.",
+    "question": "How can inheritance and class design represent account behaviour while preserving clear invariants?",
+    "approach": "Document the class API, validation rules, transaction behaviour and tests for normal and invalid operations.",
+    "lessons": "Encapsulation, precise method contracts and unit tests make small projects easier to maintain.",
+    "status": "Good candidate for a clean small repository",
+    "featured": false
+  }
+]
