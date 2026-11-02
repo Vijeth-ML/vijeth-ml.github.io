@@ -1,0 +1,17 @@
+[
+  {
+    "src": "assets/project-evidence/emnist-report-page-03.png",
+    "caption": "EMNIST Character Classification \u2014 original report, page 3",
+    "source": "projects/emnist/original/EMNIST PDF.pdf"
+  },
+  {
+    "src": "assets/project-evidence/emnist-report-page-04.png",
+    "caption": "EMNIST Character Classification \u2014 original report, page 4",
+    "source": "projects/emnist/original/EMNIST PDF.pdf"
+  },
+  {
+    "src": "assets/project-evidence/emnist-report-page-05.png",
+    "caption": "EMNIST Character Classification \u2014 original report, page 5",
+    "source": "projects/emnist/original/EMNIST PDF.pdf"
+  }
+]

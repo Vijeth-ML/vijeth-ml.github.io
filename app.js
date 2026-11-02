@@ -1,78 +1,23 @@
-const categories = ["All", "Research", "Deep Learning", "Computer Vision", "Reinforcement Learning", "NLP", "Machine Learning", "Unsupervised Learning", "Programming"];
-const grid = document.querySelector("#project-grid");
-const filterBox = document.querySelector("#filters");
-const search = document.querySelector("#search");
-const count = document.querySelector("#result-count");
-const empty = document.querySelector("#empty-state");
-const dialog = document.querySelector("#project-dialog");
-let projects = [];
-let activeCategory = "All";
-
-function renderFilters() {
-  filterBox.innerHTML = categories.map(category =>
-    `<button class="filter ${category === activeCategory ? "active" : ""}" type="button" data-category="${category}" aria-pressed="${category === activeCategory}">${category}</button>`
-  ).join("");
+const grid=document.getElementById('projectGrid');
+function render(filter='all'){grid.innerHTML='';const items=PROJECTS.filter(p=>filter==='all'||p.category===filter);items.forEach((p,i)=>{const el=document.createElement('article');el.className='project-card';el.innerHTML=`<div class="card-top"><span>MISSION ${String(i+1).padStart(2,'0')}</span><span class="tag">${p.tag}</span></div><h3>${p.title}</h3><p>${p.problem}</p><button class="expand" aria-expanded="false">Explore the story <span>↗</span></button><div class="details"><h4>Approach</h4><p>${p.approach}</p><h4>Evidence so far</h4><p>${p.evidence}</p><h4>Limitations</h4><p>${p.limits}</p><h4>Where next?</h4><p>${p.next}</p></div>`;const evidence=(window.PROJECT_EVIDENCE&&window.PROJECT_EVIDENCE[p.id])||[];if(evidence.length){const gallery=document.createElement('div');gallery.className='evidence-gallery';gallery.innerHTML='<h4>Original project evidence</h4><p class="evidence-note">Original report pages are shown as submitted; open an image to inspect it at full size. Captions identify the source report and page.</p>'+evidence.map(v=>`<figure><a href="${v.src}" target="_blank" rel="noopener noreferrer"><img loading="lazy" src="${v.src}" alt="${v.caption}"></a><figcaption>${v.caption}<br><a href="${v.source}" target="_blank" rel="noopener noreferrer">Open original report ↗</a></figcaption></figure>`).join('');el.querySelector('.details').appendChild(gallery)}const links=document.createElement('p');links.className='project-links';links.innerHTML=`<a href="https://github.com/Vijeth-ML/vijeth-ml.github.io/tree/main/projects/${p.id}" target="_blank" rel="noopener noreferrer">View project source and documentation ↗</a>`;el.querySelector('.details').appendChild(links);el.querySelector('.expand').addEventListener('click',e=>{const open=el.classList.toggle('expanded');e.currentTarget.setAttribute('aria-expanded',open)});grid.appendChild(el)})}
+render();document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-filter]').forEach(x=>x.classList.remove('active'));b.classList.add('active');render(b.dataset.filter)}));
+const panel=document.getElementById('chatPanel');function openChat(){panel.classList.add('visible');panel.setAttribute('aria-hidden','false');document.getElementById('chatInput').focus()}function closeChat(){panel.classList.remove('visible');panel.setAttribute('aria-hidden','true')}document.getElementById('chatOpen').onclick=openChat;document.getElementById('chatClose').onclick=closeChat;
+const messages=document.getElementById('chatMessages');function bubble(text,who='bot',html=false){const d=document.createElement('div');d.className='bubble '+who;if(html)d.innerHTML=text;else d.textContent=text;messages.appendChild(d);messages.scrollTop=messages.scrollHeight}
+const stopwords=new Set(['what','which','where','when','who','how','does','did','your','you','the','and','for','about','with','from','tell','show','explain','project','projects','can','could','would','was','are','is','this','that','have','has','into','next','some','any']);
+let lastDiscussedProject = null;
+function answer(q){
+ const s=q.toLowerCase();
+ if(/^(hi|hello|hey|good morning|good evening)\b/.test(s))return 'Hello! Think of me as a friendly guide to this portfolio. I can explain the projects without assuming you know the technical jargon, then go deeper into models, evaluation or future experiments. What would you like to explore?';
+ if(/research direction|exoplanet|astronom|kepler|tess|light curve/.test(s))return 'The research direction described here is robust machine learning for astronomy, especially finding exoplanets in Kepler and TESS light curves. In simple terms, a planet can pass in front of its star and cause a tiny, repeating dip in brightness. The challenge is that stellar activity, instrument noise and other astrophysical events can look similar. A promising next research step is to test whether models trained on one telescope or observing setup still work on another, while measuring uncertainty and false positives.';
+ if(/compare|difference between|similarities/.test(s)){
+   if(/cnn|emnist|character|handwrit/.test(s))return 'The EMNIST project is the clearest comparison in this archive: it contrasts an MLP, which learns from flattened pixel values, with a CNN, which can learn local spatial patterns such as strokes and edges. The saved notebook reports higher historical test accuracy for the CNN (87.12%) than the MLP (about 84.13%), but these figures are not yet independently reproduced and the evaluation needs correction. A fair comparison should use the same split, preprocessing and training budget, then compare per-class errors as well as accuracy.';
+   return 'I can compare projects when their source material supports it. For example, EMNIST and semantic segmentation are both computer-vision tasks, but EMNIST predicts one label for an image while segmentation predicts a class for each pixel. Which pair would you like me to compare?';
+ }
+ const terms=s.split(/[^a-z0-9]+/).filter(t=>t.length>2&&!stopwords.has(t));
+ const ranked=PROJECTS.map(p=>{const hay=(p.title+' '+p.tag+' '+p.problem+' '+p.approach+' '+p.evidence+' '+p.limits+' '+p.next+' '+p.keywords).toLowerCase();return {p,score:terms.reduce((n,t)=>n+(hay.includes(t)?(p.title.toLowerCase().includes(t)?4:1):0),0)}}).sort((a,b)=>b.score-a.score);
+ const followUp=/^(what about|and|why|how about|limitations?|weaknesses?|future work|next steps?|results?|evidence|approach|explain more|go deeper|tell me more)\b/.test(s.trim());
+ const p=(followUp && terms.length<=2 && lastDiscussedProject ? lastDiscussedProject : (ranked[0]?.score>0?ranked[0].p:null));
+ if(p){lastDiscussedProject=p;let section='';if(/limitation|weakness|failure|challenge|risk/.test(s))section=`The limitations to keep in view: ${p.limits}`;else if(/next|future|improve|progress|research/.test(s))section=`A possible next step: ${p.next}`;else if(/result|accuracy|score|metric|evidence|worked/.test(s))section=`What the current record says: ${p.evidence}`;else if(/approach|method|model|how|built/.test(s))section=`How it was approached: ${p.approach}`;else section=`The problem: ${p.problem}\n\nThe approach: ${p.approach}\n\nEvidence: ${p.evidence}\n\nLimitations: ${p.limits}\n\nWhere it could go next: ${p.next}`;return `Let's look at ${p.title}.\n\n${section}\n\nYou can ask a follow-up about its method, evidence, limitations or next experiment.`;}
+ return 'I can’t find a grounded answer to that in the project notes I have, and I’d rather be honest than invent details. I can still help with the projects documented here: the mental-health dissertation, EMNIST, semantic segmentation, multi-armed bandits, voting rules, bank-account software, Gym reinforcement learning, binary classification, word-embedding clustering and multilingual-chatbot research.\n\nIf your question is outside this portfolio, these may help: Google Scholar for research papers (https://scholar.google.com/), GitHub for source repositories (https://github.com/Vijeth-ML), or NASA Exoplanet Archive for exoplanet data (https://exoplanetarchive.ipac.caltech.edu/).';
 }
-function card(project, index) {
-  const tags = project.tags.map(tag => `<span class="tag">${escapeHtml(tag)}</span>`).join("");
-  return `<article class="project-card">
-    <div class="card-top"><span class="category-label">${escapeHtml(project.category)}</span><span class="year-label">${escapeHtml(project.year)}</span></div>
-    <h3>${escapeHtml(project.title)}</h3><p>${escapeHtml(project.summary)}</p>
-    <div class="tag-list">${tags}</div>
-    <button class="card-action" type="button" data-project="${index}" aria-label="Open details for ${escapeHtml(project.title)}"><span>Explore project notes</span><span aria-hidden="true">↗</span></button>
-  </article>`;
-}
-function escapeHtml(value) {
-  return String(value).replace(/[&<>"']/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
-}
-function renderProjects() {
-  const term = search.value.trim().toLowerCase();
-  const matching = projects.map((project, index) => ({project, index})).filter(({project}) => {
-    const categoryMatch = activeCategory === "All" || project.category === activeCategory;
-    const searchable = [project.title, project.category, project.summary, ...project.tags, project.question].join(" ").toLowerCase();
-    return categoryMatch && searchable.includes(term);
-  });
-  grid.innerHTML = matching.map(({project}, index) => card(project, projects.indexOf(project))).join("");
-  count.textContent = `${matching.length} ${matching.length === 1 ? "project" : "projects"} shown`;
-  empty.hidden = matching.length !== 0;
-  grid.hidden = matching.length === 0;
-}
-function openProject(project) {
-  document.querySelector("#dialog-category").textContent = `${project.category} · ${project.year}`;
-  document.querySelector("#dialog-title").textContent = project.title;
-  document.querySelector("#dialog-summary").textContent = project.summary;
-  document.querySelector("#dialog-question").textContent = project.question;
-  document.querySelector("#dialog-approach").textContent = project.approach;
-  document.querySelector("#dialog-lessons").textContent = project.lessons;
-  document.querySelector("#dialog-status").textContent = project.status;
-  dialog.showModal();
-}
-filterBox.addEventListener("click", event => {
-  const button = event.target.closest("button[data-category]");
-  if (!button) return;
-  activeCategory = button.dataset.category;
-  renderFilters(); renderProjects();
-});
-search.addEventListener("input", renderProjects);
-grid.addEventListener("click", event => {
-  const button = event.target.closest("button[data-project]");
-  if (button) openProject(projects[Number(button.dataset.project)]);
-});
-document.querySelector("#dialog-close").addEventListener("click", () => dialog.close());
-document.querySelector("#dialog-done").addEventListener("click", () => dialog.close());
-dialog.addEventListener("click", event => { if (event.target === dialog) dialog.close(); });
-document.querySelector("#theme-toggle").addEventListener("click", () => {
-  const light = document.documentElement.classList.toggle("light");
-  document.querySelector("#theme-toggle").textContent = light ? "☀" : "☾";
-  document.querySelector("#theme-toggle").setAttribute("aria-label", light ? "Switch to dark theme" : "Switch to light theme");
-});
-fetch("projects.json").then(response => {
-  if (!response.ok) throw new Error("Could not load projects.json");
-  return response.json();
-}).then(data => {
-  projects = data;
-  document.querySelector("#project-count").textContent = projects.length;
-  renderFilters(); renderProjects();
-}).catch(() => {
-  grid.innerHTML = `<p>Project data could not load. Open this site through GitHub Pages or a local web server rather than directly as a file.</p>`;
-});
+function send(q){if(!q.trim())return;bubble(q,'user');bubble(answer(q));}document.getElementById('chatForm').addEventListener('submit',e=>{e.preventDefault();const input=document.getElementById('chatInput');send(input.value);input.value=''});document.querySelectorAll('.suggestions button').forEach(b=>b.addEventListener('click',()=>send(b.textContent)));document.addEventListener('keydown',e=>{if(e.key==='Escape')closeChat()});
