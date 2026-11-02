@@ -32,3 +32,35 @@ body{background:radial-gradient(ellipse at 76% 18%,#123047 0,transparent 36%),va
 .chat-notice{padding:14px 19px 15px;background:linear-gradient(90deg,#142b40,#122036);font-size:11px;line-height:1.65;color:#b5c7d9;border-bottom:1px solid var(--line)}.notice-kicker{display:block;font:9px 'DM Mono';letter-spacing:.14em;color:var(--cyan);margin-bottom:5px}.chat-messages{padding:18px 16px;gap:12px}.bubble{font-size:12px;line-height:1.7;border-radius:12px;padding:12px 14px}.bubble.bot{background:#172d43;border:1px solid #9dc9e018}.bubble.user{background:#16434b;border:1px solid #71e3ed44}.suggestions{padding:10px 13px;gap:7px}.suggestions button{border-radius:999px;border-color:#54758a66;padding:8px 11px;font-size:9px;color:#b7d5e4}.suggestions button:hover{border-color:var(--cyan);color:var(--cyan);background:#71e3ed0d}.chat-panel form{padding:13px 14px 10px;border-top:1px solid var(--line)}.chat-panel input{border-radius:9px;padding:13px 14px;font-size:11px;background:#081323;border-color:#54758a66}.chat-panel input:focus{border-color:var(--cyan);box-shadow:0 0 0 3px #71e3ed12}.chat-panel form button{width:44px;border-radius:9px;font-size:17px}.chat-footnote{padding:0 16px 13px;text-align:center;font:8px 'DM Mono';letter-spacing:.08em;color:#728ba4}
 @media(max-width:580px){.navigator-launcher{right:15px;bottom:15px;padding:9px 13px 9px 9px;gap:10px}.launcher-orbit{width:35px;height:35px;flex-basis:35px}.launcher-copy b{font-size:9px}.launcher-copy small{font-size:9px}.chat-panel{right:10px;bottom:78px;width:calc(100vw - 20px);height:min(680px,calc(100vh - 95px))}}
 @media(prefers-reduced-motion:reduce){.navigator-launcher{transition:none}}
+
+/* Research Navigator: enforce floating bottom-right positioning */
+button.navigator-launcher,
+#chatOpen.navigator-launcher {
+    position: fixed !important;
+    display: flex !important;
+    right: 28px !important;
+    bottom: 28px !important;
+    left: auto !important;
+    top: auto !important;
+    width: auto !important;
+    height: auto !important;
+    min-width: 0 !important;
+    z-index: 99999 !important;
+    transform: none;
+    margin: 0 !important;
+}
+
+button.navigator-launcher:hover,
+#chatOpen.navigator-launcher:hover {
+    transform: translateY(-4px);
+}
+
+@media (max-width: 580px) {
+    button.navigator-launcher,
+    #chatOpen.navigator-launcher {
+        right: 15px !important;
+        bottom: 15px !important;
+    }
+}
+
+
